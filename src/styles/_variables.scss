@@ -1,0 +1,14 @@
+@use "./functions" as *;
+
+//All Wrappers Max Width
+$max-width-wrapper: pxToRem(1020);
+
+$color-bg:        #0a0a0a;
+$color-text:      #f0ece4;
+$color-accent:    #c9a96e;
+$color-muted:     rgba(240, 236, 228, 0.65);
+$color-divider:   rgba(255, 255, 255, 0.12);
+$color-nav-bg:    rgba(56, 54, 29, 0.92);
+
+$font-display:    'Cormorant Garamond', serif;
+$font-body:       'Montserrat', sans-serif;

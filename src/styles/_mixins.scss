@@ -1,0 +1,22 @@
+@use "./variables" as *;
+
+//Use with @include
+@mixin tablet {
+  @media screen and (min-width: 767px) {
+    @content;
+  }
+}
+
+//Use with @include
+@mixin desktop {
+  @media screen and (min-width: 1280px) {
+    @content;
+  }
+}
+
+//Use with @extend
+%wrapper {
+  width: 100%;
+  max-width: $max-width-wrapper;
+  margin: 0 auto;
+}

@@ -1,0 +1,35 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: $primary-font;
+  font-weight: $font-regular;
+  // border: 1px dashed rgb(33, 21, 21); // Temporary for debugging
+}
+
+body {
+  font-family: $primary-font;
+  font-weight: $font-regular;
+  margin: 0;
+  // background-color: $color-light-grey;
+  background-color: $color-black;
+}
+
+.display-mobile-only {
+  @include tablet {
+    display: none;
+  }
+}
+
+.display-tablet-desktop-only {
+  display: none;
+
+  @include tablet {
+    display: inline;
+  }
+}
