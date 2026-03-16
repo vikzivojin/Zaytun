@@ -21,7 +21,7 @@ export default function Navbar() {
       <nav className="nav-root">
         <div className={`nav-inner ${scrolled ? "scrolled" : ""}`}>
           <div className="nav-logo">
-            <img src={logopicture} height="70"/>
+            <a href="/"><img src={logopicture} height="70"/></a>
           </div>
 
           <ul className="nav-links">

@@ -8,15 +8,16 @@ export default function Footer() {
 
             <footer className="footer">
                 <div className="footer__logo">
-                <img src={logoImg} alt="Zaytün" />
+                <a href="/"><img src={logoImg} alt="Zaytün" /></a>
                 </div>
 
                 <p className="footer__copy">© {new Date().getFullYear()} Zaytün. All rights reserved.</p>
 
                 <nav className="footer__links">
-                <a href="/">Home</a>
-                <a href="/contact">Contact</a>
-                <a href="/order">Order</a>
+                <a href="/Home">Home</a>
+                <a href="/Locations">Locations</a>
+                <a href="/Contact">Contact</a>
+                <a href="/Order">Order</a>
                 
                 </nav>
             </footer>

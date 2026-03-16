@@ -73,7 +73,7 @@ function OnlineCard() {
           <div className="price-pill__price">$40</div>
         </div>
       </div>
-      <a href="/order" className="btn-primary">
+      <a href="/Order" className="btn-primary">
         Place an Order <ArrowRight />
       </a>
     </div>
@@ -148,6 +148,13 @@ function StoreCard({ location }) {
 // PAGE
 // ─────────────────────────────────────────────────────────────
 export default function LocationsPage() {
+
+  function componentDidMount() {
+        window.scrollTo(0, 0);
+    };
+
+  componentDidMount();
+  
   return (
     <div className="locations-page">
       
