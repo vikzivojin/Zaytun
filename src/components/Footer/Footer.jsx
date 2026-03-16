@@ -15,8 +15,9 @@ export default function Footer() {
 
                 <nav className="footer__links">
                 <a href="/">Home</a>
-                <a href="/order">Order</a>
                 <a href="/contact">Contact</a>
+                <a href="/order">Order</a>
+                
                 </nav>
             </footer>
             

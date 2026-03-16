@@ -117,54 +117,6 @@ $transition-fast: 0.3s ease;
   align-self: center;
 }
 
-// ── Demo Page ──────────────────────────────────────────────
-.demo-page {
-  min-height: 200vh;
-  background: $color-bg;
-  background-image:
-    radial-gradient(ellipse at 20% 50%, rgba(201, 169, 110, 0.04) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(100, 80, 60, 0.06) 0%, transparent 50%);
-}
-
-.demo-hero {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  text-align: center;
-  padding: 0 24px;
-}
-
-.demo-eyebrow {
-  font-family: $font-body;
-  font-size: 0.65rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: $color-accent;
-  margin-bottom: 24px;
-  opacity: 0.9;
-}
-
-.demo-title {
-  font-family: $font-display;
-  font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: 300;
-  color: $color-text;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  margin-bottom: 24px;
-}
-
-.demo-subtitle {
-  font-family: $font-body;
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  color: rgba(240, 236, 228, 0.35);
-  max-width: 380px;
-}
-
 // ── Scroll Hint ────────────────────────────────────────────
 .scroll-hint {
   position: absolute;

@@ -1,0 +1,328 @@
+@use "../../styles/variables" as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap');
+
+
+
+
+// ── Variables (mirrored from HomePage) ────────────────────
+
+
+$font-display: 'Cormorant Garamond', serif;
+$font-body:    'Jost', sans-serif;
+$ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+
+// ── Page Shell ─────────────────────────────────────────────
+.contact-page {
+  background: $black;
+  color: $cream;
+  font-family: $font-body;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+// ── Shared helpers ─────────────────────────────────────────
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: $font-body;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: $gold;
+  margin-bottom: 32px;
+
+  &::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: $gold;
+    flex-shrink: 0;
+  }
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: $gold;
+  color: $black;
+  font-family: $font-body;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover:not(:disabled) {
+    background: $gold-light;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(201, 169, 110, 0.25);
+
+    svg { transform: translateX(4px); }
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  svg {
+    transition: transform 0.3s ease;
+  }
+}
+
+// ── Hero ───────────────────────────────────────────────────
+.contact-hero {
+  padding: 120px 96px 80px;
+  max-width: 1400px;
+  animation: fadeUp 1.5s $ease-out both;
+
+  @media (max-width: 1024px) {
+    padding: 100px 64px 64px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 80px 28px 48px;
+  }
+}
+
+.contact-hero__title {
+  font-family: $font-display;
+  font-size: clamp(3rem, 5.5vw, 5.2rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: $cream;
+  margin-bottom: 28px;
+
+  em {
+    font-style: italic;
+    color: $gold-light;
+    display: block;
+  }
+}
+
+.contact-hero__desc {
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: $muted;
+  max-width: 480px;
+}
+
+.contact-hero__rule {
+  width: 100%;
+  height: 1px;
+  background: $border-gold;
+  margin-top: 64px;
+
+  @media (max-width: 768px) {
+    margin-top: 48px;
+  }
+}
+
+// ── Body Layout ────────────────────────────────────────────
+.contact-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  min-height: 60vh;
+  animation: fadeUp 1.0s $ease-out 0.15s both;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr 300px;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── Form ───────────────────────────────────────────────────
+.contact-form-wrap {
+  padding: 72px 96px 96px;
+  border-right: 1px solid $border-gold;
+
+  @media (max-width: 1024px) {
+    padding: 56px 64px 80px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 48px 28px 56px;
+    border-right: none;
+    border-bottom: 1px solid $border-gold;
+  }
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.form-row {
+  &--half {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+
+    @media (max-width: 560px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  label {
+    font-family: $font-body;
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: $gold;
+  }
+
+  input,
+  textarea {
+    background: $black-soft;
+    border: none;
+    border-bottom: 3px solid $border-gold;
+    color: $cream;
+    font-family: $font-body;
+    font-size: 0.88rem;
+    font-weight: 300;
+    padding: 12px 0;
+    outline: none;
+    resize: none;
+    transition: border-color 0.25s ease;
+    width: 100%;
+
+    &::placeholder {
+      color: rgba($cream, 0.4);
+    }
+
+    &:focus {
+      border-color: $gold;
+    }
+
+    &:disabled {
+      opacity: 0.45;
+    }
+  }
+
+  textarea {
+    line-height: 1.8;
+  }
+}
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+}
+
+.form-feedback {
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+
+  &--success { color: $gold-light; }
+  &--error   { color: #e07070; }
+}
+
+// ── Info Aside ─────────────────────────────────────────────
+.contact-info {
+  padding: 72px 56px 96px;
+  background: $black-soft;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+  @media (max-width: 1024px) {
+    padding: 56px 40px 80px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 48px 28px 64px;
+  }
+}
+
+.info-block {
+  &__label {
+    font-family: $font-body;
+    font-size: 0.58rem;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: $gold;
+    margin-bottom: 14px;
+  }
+
+  &__value {
+    font-family: $font-display;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: $cream;
+    text-decoration: none;
+    transition: color 0.25s ease;
+
+    &:is(a):hover {
+      color: $gold-light;
+    }
+  }
+}
+
+// ── Pickup Locations ───────────────────────────────────────
+.pickup-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.pickup-item {
+  padding-left: 16px;
+  border-left: 1px solid $border-gold;
+
+  &__area {
+    font-family: $font-display;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: $cream;
+    margin-bottom: 4px;
+  }
+
+  &__address {
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: $muted;
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+  }
+}
+
+// ── Animation ──────────────────────────────────────────────
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -22,8 +22,16 @@ function ArrowRight() {
   );
 }
 
+
+
 export default function HomePage() {
   const marqueeItems = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS]; // duplicate for seamless loop
+
+  function componentDidMount() {
+        window.scrollTo(0, 0);
+    };
+
+  componentDidMount();
 
   return (
     <div className="home-page">
@@ -44,7 +52,7 @@ export default function HomePage() {
           </h1>
 
           <p className="hero__desc">
-            Zaytün is a small-batch marinated olive spread, crafted with pomegranate, walnut, and fresh herbs. A taste of the Mediterranean, made in Toronto.
+            Zaytün is a small-batch marinated olive spread, crafted with pomegranate, walnut, and fresh herbs. An original take on a Persian classic, made in Toronto.
           </p>
 
           <div className="hero__cta">
@@ -132,7 +140,7 @@ export default function HomePage() {
                 <div className="feature-card__tag">Snack</div>
                 <div className="feature-card__title">On <em>crostini</em></div>
                 <div className="feature-card__desc">
-                  The perfect bite — toasted bread, a leaf of fresh basil, and a generous scoop of Zaytün.
+                  The perfect bite — toasted bread and a generous scoop of Zaytün.
                 </div>
               </div>
             </div>
