@@ -15,9 +15,9 @@ const SIZES = [
 ];
 
 const LOCATIONS = [
-  { id: "downtown", name: "Downtown Toronto", icon: "🏙️" },
-  { id: "etobicoke", name: "Etobicoke",        icon: "🌳" },
-  { id: "north-york", name: "North York",       icon: "🏘️" },
+  { id: "downtown", name: "Downtown Toronto (Yonge & Dundas)", icon: "🏙️" },
+  { id: "etobicoke", name: "Etobicoke (Park Lawn & Lakeshore W)",        icon: "🫒" },
+  { id: "north-york", name: "North York (Bayview & Finch E)",       icon: "🥙" },
 ];
 
 const RECIPIENT_EMAIL = "vikzivojin@gmail.com";
@@ -144,7 +144,7 @@ export default function OrderPage() {
             <div className="nut-warning__text">
               <strong>This product contains nuts</strong>
               <span>
-                By checking this box I confirm I am aware this product contains nuts and is produced in a facility that handles tree nuts and peanuts.
+                By checking this box I confirm I am aware this product contains nuts and is produced in a facility that handles nuts.
               </span>
             </div>
             <span className="nut-warning__icon">🥜</span>
@@ -175,7 +175,7 @@ export default function OrderPage() {
                   </div>
                   <div className="size-option__info">
                     <div className="size-option__weight">{size.label}</div>
-                    <div className="size-option__price">{size.price}</div>
+                    <div className="size-option__price">{size.price} + HST</div>
                   </div>
                 </div>
                 <div className="size-option__check">

@@ -1,0 +1,57 @@
+@use "../../styles/variables" as *;
+@use "../../styles/functions" as *;
+@use "../../styles/mixins" as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap');
+
+
+
+// ── Footer ─────────────────────────────────────────────────
+.footer {
+  background: $black;
+  border-top: 1px solid $border-gold;
+  padding: 48px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 24px;
+    padding: 36px 28px;
+    text-align: center;
+  }
+}
+
+.footer__logo {
+  img {
+    height: 56px;
+    width: auto;
+    opacity: 0.9;
+  }
+}
+
+.footer__copy {
+  font-size: 0.72rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: rgba($cream, 0.25);
+}
+
+.footer__links {
+  display: flex;
+  gap: 28px;
+
+  a {
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba($cream, 0.35);
+    text-decoration: none;
+    transition: color 0.25s ease;
+
+    &:hover { color: $gold; }
+  }
+}

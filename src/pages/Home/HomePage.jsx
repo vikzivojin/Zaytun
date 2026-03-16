@@ -1,5 +1,6 @@
 import "./HomePage.scss";
 
+
 // ── Image imports ─────────────────────────────────────────
 // Replace these paths with your actual asset paths
 import heroImg      from "../../assets/images/zaytun-hero.jpeg";
@@ -179,20 +180,7 @@ export default function HomePage() {
         </a>
       </section>
 
-      {/* ── Footer ── */}
-      <footer className="home-footer">
-        <div className="footer__logo">
-          <img src={logoImg} alt="Zaytün" />
-        </div>
-
-        <p className="footer__copy">© {new Date().getFullYear()} Zaytün. All rights reserved.</p>
-
-        <nav className="footer__links">
-          <a href="/">Home</a>
-          <a href="/order">Order</a>
-          <a href="/contact">Contact</a>
-        </nav>
-      </footer>
+      
 
     </div>
   );

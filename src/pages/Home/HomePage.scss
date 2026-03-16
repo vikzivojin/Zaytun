@@ -1,16 +1,9 @@
+@use "../../styles/variables" as *;
+
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap');
 
+
 // ── Variables ──────────────────────────────────────────────
-$black:         #0d0b09;
-$black-soft:    #141210;
-$gold:          #c9a96e;
-$gold-light:    #e8cfa0;
-$gold-dim:      rgba(201, 169, 110, 0.15);
-$cream:         #f5efe6;
-$cream-dark:    #ede4d6;
-$white:         #fdfaf6;
-$muted:         rgba(245, 239, 230, 0.5);
-$border-gold:   rgba(201, 169, 110, 0.2);
 
 $font-display:  'Cormorant Garamond', serif;
 $font-body:     'Jost', sans-serif;
@@ -668,54 +661,7 @@ img {
   }
 }
 
-// ── Footer ─────────────────────────────────────────────────
-.home-footer {
-  background: $black;
-  border-top: 1px solid $border-gold;
-  padding: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 24px;
-    padding: 36px 28px;
-    text-align: center;
-  }
-}
-
-.footer__logo {
-  img {
-    height: 56px;
-    width: auto;
-    opacity: 0.9;
-  }
-}
-
-.footer__copy {
-  font-size: 0.72rem;
-  font-weight: 300;
-  letter-spacing: 0.12em;
-  color: rgba($cream, 0.25);
-}
-
-.footer__links {
-  display: flex;
-  gap: 28px;
-
-  a {
-    font-size: 0.65rem;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba($cream, 0.35);
-    text-decoration: none;
-    transition: color 0.25s ease;
-
-    &:hover { color: $gold; }
-  }
-}
 
 // ── Animations ─────────────────────────────────────────────
 @keyframes fadeUp {

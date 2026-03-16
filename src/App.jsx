@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Navbar from './components/Navbar/Navbar'
+import Footer from './components/Footer/Footer'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from './pages/Home/HomePage.jsx'
 import OrderPage from './pages/Order/OrderPage.jsx'
@@ -20,7 +21,8 @@ function App() {
         {/* <Route path="*" element={<PageNotFound title="404 - PAGE NOT FOUND"
           content="The content you are looking for cannot be found." />} />
         <Route path="/test" element={""} /> */}
-      </Routes>
+        </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   )

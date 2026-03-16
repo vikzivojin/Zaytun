@@ -1,17 +1,8 @@
+@use "../../styles/variables" as *;
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap');
 
 // ── Variables ──────────────────────────────────────────────
-$cream:         #faf6f0;
-$warm-white:    #fff9f2;
-$brown-dark:    #2c1a0e;
-$brown-mid:     #6b3f1f;
-$brown-light:   #c4844a;
-$accent:        #d4a853;
-$accent-light:  #f0d49a;
-$muted:         #9c7a5e;
-$border:        rgba(196, 132, 74, 0.25);
-$error:         #c0392b;
-$success:       #27ae60;
+
 
 $font-display:  'Playfair Display', serif;
 $font-body:     'DM Sans', sans-serif;
@@ -29,7 +20,7 @@ $transition:    0.25s ease;
 
 .order-page {
   min-height: 100vh;
-  background-color: $cream;
+  background-color: $color-bg;
   background-image:
     radial-gradient(ellipse at 10% 0%, rgba(212, 168, 83, 0.12) 0%, transparent 50%),
     radial-gradient(ellipse at 90% 100%, rgba(196, 132, 74, 0.08) 0%, transparent 50%);
@@ -49,7 +40,7 @@ $transition:    0.25s ease;
     font-weight: 500;
     letter-spacing: 0.35em;
     text-transform: uppercase;
-    color: $brown-light;
+    color: $gold;
     margin-bottom: 14px;
   }
 
@@ -57,13 +48,13 @@ $transition:    0.25s ease;
     font-family: $font-display;
     font-size: clamp(2.4rem, 5vw, 3.6rem);
     font-weight: 400;
-    color: $brown-dark;
+    color: $gold;
     line-height: 1.1;
     margin-bottom: 16px;
 
     em {
       font-style: italic;
-      color: $brown-mid;
+      color: $gold-light;
     }
   }
 
@@ -87,7 +78,7 @@ $transition:    0.25s ease;
 .order-form {
   max-width: 680px;
   margin: 0 auto;
-  background: $warm-white;
+  background: $cream-dark;
   border-radius: $radius-lg;
   border: 1px solid $border;
   box-shadow:
@@ -151,7 +142,7 @@ $transition:    0.25s ease;
     flex-shrink: 0;
     width: 22px;
     height: 22px;
-    border: 2px solid $brown-light;
+    border: 2px solid $gold;
     border-radius: 6px;
     display: flex;
     align-items: center;
@@ -168,8 +159,8 @@ $transition:    0.25s ease;
   }
 
   &__checkbox:checked + &__box {
-    background: $brown-light;
-    border-color: $brown-light;
+    background: $gold;
+    border-color: $gold;
 
     svg {
       opacity: 1;
@@ -288,7 +279,7 @@ $transition:    0.25s ease;
   &__price {
     font-size: 0.95rem;
     font-weight: 500;
-    color: $brown-light;
+    color: $gold;
   }
 
   &__check {
@@ -349,7 +340,7 @@ $transition:    0.25s ease;
     font-family: $font-body;
     font-size: 0.9rem;
     color: $brown-dark;
-    background: white;
+    background: $cream;
     border: 1.5px solid $border;
     border-radius: 8px;
     outline: none;
@@ -357,7 +348,7 @@ $transition:    0.25s ease;
     appearance: none;
 
     &::placeholder {
-      color: rgba(156, 122, 94, 0.5);
+      color: rgba(146, 112, 84, 0.5);
     }
 
     &:focus {
@@ -401,7 +392,7 @@ $transition:    0.25s ease;
   &__radio {
     width: 20px;
     height: 20px;
-    border: 2px solid $brown-light;
+    border: 2px solid $gold;
     border-radius: 50%;
     flex-shrink: 0;
     display: flex;
@@ -449,6 +440,10 @@ $transition:    0.25s ease;
     border-color: $accent;
     background: rgba(212, 168, 83, 0.06);
   }
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }
 
 // ── Submit Button ──────────────────────────────────────────
