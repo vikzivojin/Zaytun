@@ -1,9 +1,9 @@
-import { useState } from "react";
+import React, { useState, useRef } from "react";
+import emailjs from '@emailjs/browser';
 import "./OrderPage.scss";
 
 // ─────────────────────────────────────────────────────────────
-// EmailJS config — replace these with your own EmailJS values
-// Sign up free at https://www.emailjs.com
+// EmailJS config — https://www.emailjs.com
 // ─────────────────────────────────────────────────────────────
 const EMAILJS_SERVICE_ID  = "service_7lk0bfj";
 const EMAILJS_TEMPLATE_ID = "template_u589z4u";
@@ -82,13 +82,17 @@ export default function OrderPage() {
     };
 
     try {
-      // Dynamically load EmailJS to keep bundle lean
-      const emailjs = await import("https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js");
+      // const emailjs = await import("https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js");
+      await emailjs.init({
+        publicKey: EMAILJS_PUBLIC_KEY,
+      })
+      
+      console.log(emailjs);
       console.log(EMAILJS_SERVICE_ID);
       console.log(EMAILJS_TEMPLATE_ID);
       console.log(templateParams);
       console.log(EMAILJS_PUBLIC_KEY);
-      await emailjs.default.send(
+      await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         templateParams,
@@ -97,7 +101,8 @@ export default function OrderPage() {
       
       setStatus("success");
     } catch (err) {
-      console.error(err);
+      //console.error(err);
+      console.log(err);
       setStatus("error");
     }
   };

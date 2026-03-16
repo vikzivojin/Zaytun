@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from './pages/Home/Home.jsx'
+import HomePage from './pages/Home/HomePage.jsx'
 import OrderPage from './pages/Order/OrderPage.jsx'
 //import Contact from './pages/Contact/Contact.jsx'
 
@@ -14,7 +14,8 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes> 
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/Home" element={<HomePage />} />
         <Route path="/Order" element={<OrderPage />} />
         {/* <Route path="*" element={<PageNotFound title="404 - PAGE NOT FOUND"
           content="The content you are looking for cannot be found." />} />
