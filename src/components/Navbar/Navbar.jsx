@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import "./Navbar.scss";
 import logopicture from '../../assets/images/zaytun-logo.png'
 
-const navItems = ["Home", "Contact", "Order"];
+const navItems = ["Home", "Locations", "Contact", "Order"];
 
 export default function Navbar() {
   const [active, setActive] = useState("Home");

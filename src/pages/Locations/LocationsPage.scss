@@ -1,0 +1,400 @@
+@use "../../styles/variables" as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap');
+
+// ── Variables (mirrored from site) ─────────────────────────
+
+$font-display: 'Cormorant Garamond', serif;
+$font-body:    'Jost', sans-serif;
+$ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+
+// ── Page Shell ─────────────────────────────────────────────
+.locations-page {
+  background: $black;
+  color: $cream;
+  font-family: $font-body;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+// ── Shared Helpers ─────────────────────────────────────────
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: $font-body;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: $gold;
+  margin-bottom: 32px;
+
+  &::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: $gold;
+    flex-shrink: 0;
+  }
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: $gold;
+  color: $black;
+  font-family: $font-body;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: $gold-light;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(201, 169, 110, 0.25);
+    svg { transform: translateX(4px); }
+  }
+
+  svg { transition: transform 0.3s ease; }
+}
+
+// ── Hero ───────────────────────────────────────────────────
+.locations-hero {
+  padding: 120px 96px 80px;
+  max-width: 900px;
+  animation: fadeUp 0.9s $ease-out both;
+
+  @media (max-width: 1024px) { padding: 100px 64px 64px; }
+  @media (max-width: 768px)  { padding: 80px 28px 48px; }
+}
+
+.locations-hero__title {
+  font-family: $font-display;
+  font-size: clamp(3rem, 5.5vw, 5.2rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: $cream;
+  margin-bottom: 28px;
+
+  em {
+    font-style: italic;
+    color: $gold-light;
+    display: block;
+  }
+}
+
+.locations-hero__desc {
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: $muted;
+  max-width: 480px;
+}
+
+.locations-hero__rule {
+  width: 100%;
+  height: 1px;
+  background: $border-gold;
+  margin-top: 64px;
+
+  @media (max-width: 768px) { margin-top: 48px; }
+}
+
+// ── Section Wrapper ────────────────────────────────────────
+.locations-section {
+  padding: 0 96px;
+  animation: fadeUp 0.9s $ease-out 0.15s both;
+
+  @media (max-width: 1024px) { padding: 0 64px; }
+  @media (max-width: 768px)  { padding: 0 28px; }
+
+  &--stores {
+    display: flex;
+    flex-direction: column;
+    gap: 2px; // tight stack; gap between cards uses the border
+    padding-bottom: 96px;
+  }
+}
+
+// ── Section Divider ────────────────────────────────────────
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 72px 96px 64px;
+  color: $gold;
+
+  @media (max-width: 1024px) { margin: 64px 64px 56px; }
+  @media (max-width: 768px)  { margin: 56px 28px 48px; }
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: $border-gold;
+  }
+
+  span {
+    font-family: $font-display;
+    font-size: 0.75rem;
+    font-style: italic;
+    letter-spacing: 0.25em;
+    white-space: nowrap;
+    color: rgba($gold, 0.6);
+  }
+}
+
+// ── Online Card ────────────────────────────────────────────
+.online-card {
+  background: $black-soft;
+  padding: 72px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 0;
+
+  @media (max-width: 1024px) { padding: 56px 56px; }
+  @media (max-width: 768px)  { padding: 48px 28px; }
+}
+
+.online-card__eyebrow {
+  // wraps section-label so margin-bottom on label doesn't collapse weirdly
+}
+
+.online-card__title {
+  font-family: $font-display;
+  font-size: clamp(2.4rem, 3.8vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: $cream;
+  margin-bottom: 24px;
+
+  em {
+    font-style: italic;
+    color: $gold-light;
+  }
+}
+
+.online-card__body {
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: $muted;
+  max-width: 520px;
+  margin-bottom: 40px;
+}
+
+.online-card__prices {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.price-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 32px;
+  border: 1px solid $border-gold;
+  background: rgba($gold, 0.04);
+  transition: all 0.3s ease;
+  cursor: default;
+
+  &:hover {
+    border-color: $gold;
+    background: rgba($gold, 0.08);
+    transform: translateY(-3px);
+  }
+
+  &__weight {
+    font-family: $font-display;
+    font-size: 1.7rem;
+    font-weight: 300;
+    color: $cream;
+    margin-bottom: 4px;
+  }
+
+  &__price {
+    font-family: $font-body;
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: $gold;
+  }
+}
+
+// ── Store Card ─────────────────────────────────────────────
+.store-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 520px;
+  border-top: 1px solid $border-gold;
+
+  // Each new StoreCard added to STORE_LOCATIONS renders as another row here
+  &:last-child {
+    border-bottom: 1px solid $border-gold;
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.store-card__info {
+  padding: 72px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: $black;
+
+  @media (max-width: 1024px) { padding: 56px 48px; }
+  @media (max-width: 768px)  { padding: 48px 28px; }
+}
+
+.store-card__name {
+  font-family: $font-display;
+  font-size: clamp(2.2rem, 3.2vw, 3.2rem);
+  font-weight: 300;
+  color: $cream;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.store-card__area {
+  font-family: $font-body;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $gold;
+  margin-bottom: 36px;
+}
+
+.store-card__address {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 24px;
+  color: $muted;
+  font-size: 0.87rem;
+  font-weight: 300;
+  line-height: 1.8;
+
+  svg {
+    margin-top: 3px;
+    flex-shrink: 0;
+    color: $gold;
+  }
+}
+
+.store-card__note {
+  font-size: 0.78rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba($gold, 0.65);
+  line-height: 1.7;
+  max-width: 380px;
+  padding: 16px 0 16px 16px;
+  border-left: 1px solid $border-gold;
+  margin-bottom: 36px;
+}
+
+// ── Hours ──────────────────────────────────────────────────
+.store-card__hours {
+  margin-bottom: 40px;
+}
+
+.store-card__hours-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: $font-body;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: $gold;
+  margin-bottom: 16px;
+
+  svg { color: $gold; }
+}
+
+.hours-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: $muted;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba($border-gold, 0.5);
+
+  &:last-child { border-bottom: none; }
+
+  &__days { color: rgba($cream, 0.7); }
+  &__time { font-variant-numeric: tabular-nums; }
+}
+
+// ── Map ────────────────────────────────────────────────────
+.store-card__map {
+  position: relative;
+  overflow: hidden;
+  background: $black-soft;
+  min-height: 400px;
+
+  @media (max-width: 900px) {
+    min-height: 320px;
+  }
+
+  iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    filter: grayscale(30%) contrast(1.05);
+    transition: filter 0.4s ease;
+  }
+
+  &:hover iframe {
+    filter: grayscale(0%) contrast(1);
+  }
+
+  // Subtle gold tint overlay
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba($gold, 0.04);
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  &:hover::after {
+    opacity: 0;
+  }
+}
+
+// ── Animation ──────────────────────────────────────────────
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

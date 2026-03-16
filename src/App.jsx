@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from './pages/Home/HomePage.jsx'
 import OrderPage from './pages/Order/OrderPage.jsx'
 import Contact from './pages/Contact/ContactPage.jsx'
+import Locations from './pages/Locations/LocationsPage.jsx'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Routes> 
         <Route path="/" element={<HomePage />} />
         <Route path="/Home" element={<HomePage />} />
+        <Route path="/Locations" element={<Locations />} />
         <Route path="/Order" element={<OrderPage />} />
         <Route path="/Contact" element={<Contact />} />
         {/* <Route path="*" element={<PageNotFound title="404 - PAGE NOT FOUND"

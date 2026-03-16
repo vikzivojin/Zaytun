@@ -126,7 +126,7 @@ export default function OrderPage() {
           Handcrafted <em>with love</em>
         </h1>
         <p className="order-header__subtitle">
-          Fresh, small-batch products made to order. Choose your size, pick a location, and we'll have it ready for you.
+          Fresh, small-batch products made to order. Choose your size, pick a location, and we'll have it ready for you. Payment is made at pick up.
         </p>
         <div className="order-header__divider" />
       </header>
