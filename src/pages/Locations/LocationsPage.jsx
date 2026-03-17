@@ -1,4 +1,5 @@
 import "./LocationsPage.scss";
+import { Link, NavLink } from 'react-router-dom';
 
 function ArrowRight() {
   return (
@@ -63,19 +64,11 @@ function OnlineCard() {
       <p className="online-card__body">
         Place your order ahead of time and choose a pickup location in Downtown Toronto, Etobicoke, or North York. We'll have your Zaytün ready and waiting.
       </p>
-      <div className="online-card__prices">
-        <div className="price-pill">
-          <div className="price-pill__weight">200g</div>
-          <div className="price-pill__price">$11</div>
-        </div>
-        <div className="price-pill">
-          <div className="price-pill__weight">800g</div>
-          <div className="price-pill__price">$40</div>
-        </div>
-      </div>
-      <a href="/Order" className="btn-primary">
+      <NavLink to="/Order">
+      <div className="btn-primary">
         Place an Order <ArrowRight />
-      </a>
+      </div>
+      </NavLink>
     </div>
   );
 }
@@ -154,23 +147,12 @@ export default function LocationsPage() {
     };
 
   componentDidMount();
-  
+
   return (
     <div className="locations-page">
       
       {/* Hero */}
-      <section className="locations-hero">
-        <div className="locations-hero__inner">
-          <span className="section-label">Find Zaytün</span>
-          <h1 className="locations-hero__title">
-            Where to <em>find us</em>
-          </h1>
-          <p className="locations-hero__desc">
-            Order directly from us online, or pick up a jar from one of our retail partners. More locations coming soon.
-          </p>
-        </div>
-        <div className="locations-hero__rule" aria-hidden="true" />
-      </section>
+      
 
       {/* Online ordering */}
       <section className="locations-section">

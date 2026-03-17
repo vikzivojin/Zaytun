@@ -1,4 +1,5 @@
 import "./HomePage.scss";
+import { Link, NavLink } from 'react-router-dom';
 
 
 // ── Image imports ─────────────────────────────────────────
@@ -56,9 +57,11 @@ export default function HomePage() {
           </p>
 
           <div className="hero__cta">
-            <a href="/order" className="btn-primary">
+            <NavLink to="/Order">
+            <div className="btn-primary">
               Order Now <ArrowRight />
-            </a>
+            </div>
+            </NavLink>
             <a href="#story" className="btn-ghost">Our Story</a>
           </div>
         </div>
@@ -183,9 +186,11 @@ export default function HomePage() {
           </div>
         </div>
 
-        <a href="/order" className="btn-primary">
+        <NavLink to="/Order">
+        <div className="btn-primary">
           Place an Order <ArrowRight />
-        </a>
+        </div>
+        </NavLink>
       </section>
 
       

@@ -1,5 +1,9 @@
 import logoImg      from "../../assets/images/zaytun-logo.png";
+import { Link, NavLink } from 'react-router-dom';
 import "./Footer.scss";
+import "../Navbar/Navbar.scss";
+
+const navItems = ["Home", "Locations", "Contact", "Order"];
 
 export default function Footer() {
 
@@ -14,10 +18,23 @@ export default function Footer() {
                 <p className="footer__copy">© {new Date().getFullYear()} Zaytün. All rights reserved.</p>
 
                 <nav className="footer__links">
-                <a href="/Home">Home</a>
-                <a href="/Locations">Locations</a>
-                <a href="/Contact">Contact</a>
-                <a href="/Order">Order</a>
+                    <ul className="nav-links">
+                            {navItems.map((item, i) => (
+                              <>
+                                {i > 0 && <div className="nav-divider" key={`div-${i}`} />}
+                                <li key={item}>
+                                  <NavLink to={item}>
+                                  <button
+                                    className="nav-link-btn"
+                                  >
+                                    {item}
+                                    
+                                  </button>
+                                  </NavLink>
+                                </li>
+                              </>
+                            ))}
+                          </ul>
                 
                 </nav>
             </footer>
