@@ -6,6 +6,7 @@ import HomePage from './pages/Home/HomePage.jsx'
 import OrderPage from './pages/Order/OrderPage.jsx'
 import Contact from './pages/Contact/ContactPage.jsx'
 import Locations from './pages/Locations/LocationsPage.jsx'
+import ScrollToTop from './scripts/ScrollToTop.jsx'
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <ScrollToTop />
         <Navbar />
         <Routes> 
         <Route path="/" element={<HomePage />} />

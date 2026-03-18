@@ -51,11 +51,6 @@ export default function ContactPage() {
     }
   }
 
-  function componentDidMount() {
-        window.scrollTo(0, 0);
-    };
-
-  componentDidMount();
 
   return (
     <div className="contact-page">

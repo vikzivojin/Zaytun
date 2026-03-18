@@ -110,11 +110,7 @@ export default function OrderPage() {
   // Today's date string for min date attribute
   const today = new Date().toISOString().split("T")[0];
 
-  function componentDidMount() {
-        window.scrollTo(0, 0);
-    };
-
-  componentDidMount();
+  
 
   return (
     <div className="order-page">

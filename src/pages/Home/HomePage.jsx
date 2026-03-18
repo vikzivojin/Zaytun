@@ -9,6 +9,7 @@ import plateImg     from "../../assets/images/zaytun-plate.jpeg";
 import holdImg      from "../../assets/images/zaytun-hold.jpeg";
 import sandwichImg  from "../../assets/images/zaytun-sandwich.jpeg";
 import logoImg      from "../../assets/images/zaytun-logo.png";
+import founderImg   from "../../assets/images/zaytun-founder.jpeg";
 
 // Marquee text repeated for seamless loop
 const MARQUEE_ITEMS = [
@@ -28,11 +29,7 @@ function ArrowRight() {
 export default function HomePage() {
   const marqueeItems = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS]; // duplicate for seamless loop
 
-  function componentDidMount() {
-        window.scrollTo(0, 0);
-    };
-
-  componentDidMount();
+  
 
   return (
     <div className="home-page">
@@ -40,7 +37,7 @@ export default function HomePage() {
       {/* ── Hero ── */}
       <section className="hero">
         <div className="hero__image-side">
-          <img src={heroImg} alt="Zaytun marinated olives served in a bowl" />
+          <img src={heroImg} alt="Zaytün marinated olives served in a bowl" />
         </div>
 
         <div className="hero__content">
@@ -78,19 +75,24 @@ export default function HomePage() {
 
       {/* ── Story ── */}
       <section className="story" id="story">
+        
         <div className="story__text">
-          <span className="section-label">Our Story</span>
+          <span className="section-label">Adam's Story</span>
 
           <h2 className="story__title">
-            Born from a love of <em>olive tradition</em>
+            <em>Crafted</em> and <em>refined</em> over years
           </h2>
 
           <p className="story__body">
-            Every jar of Zaytün begins with carefully selected green olives, slow-marinated in a blend of pomegranate molasses, toasted walnuts, fresh mint, and extra-virgin olive oil. It's a recipe rooted in Middle Eastern tradition — brought to life in small batches right here in Toronto.
+            Adam initially served Zaytün to his family and friends. Over time the recipe would get refined and his fanbase would grow.
           </p>
 
           <p className="story__body">
-            No preservatives. No shortcuts. Just real ingredients and real care, ready to elevate your table.
+            The deciding factor to launch Zaytün was seeing his creation transform his most olive-averse friends into the biggest fans of his creation.
+          </p>
+
+          <p className="story__body">
+            No preservatives. No shortcuts. Just real ingredients and real care.
           </p>
 
           <div className="story__stats">
@@ -106,6 +108,13 @@ export default function HomePage() {
               <div className="stat__number">2</div>
               <div className="stat__label">Sizes Available</div>
             </div>
+          </div>
+        </div>
+
+        <div className="story__founder">
+          <img src={founderImg} alt="Zaytün founder in the kitchen" />
+          <div className="story__founder-caption">
+            <span>Adam Jamkhou - Creator of Zaytün</span>
           </div>
         </div>
 
@@ -127,7 +136,7 @@ export default function HomePage() {
 
           <div className="feature__grid">
             <div className="feature-card">
-              <img src={plateImg} alt="Zaytun served on a plate" />
+              <img src={plateImg} alt="Zaytün served on a plate" />
               <div className="feature-card__overlay">
                 <div className="feature-card__tag">Serve</div>
                 <div className="feature-card__title">On the <em>table</em></div>
@@ -138,7 +147,7 @@ export default function HomePage() {
             </div>
 
             <div className="feature-card">
-              <img src={holdImg} alt="Zaytun on a crostini" />
+              <img src={holdImg} alt="Zaytün on a crostini" />
               <div className="feature-card__overlay">
                 <div className="feature-card__tag">Snack</div>
                 <div className="feature-card__title">On <em>crostini</em></div>
@@ -149,7 +158,7 @@ export default function HomePage() {
             </div>
 
             <div className="feature-card">
-              <img src={sandwichImg} alt="Zaytun in a sandwich" />
+              <img src={sandwichImg} alt="Zaytün in a sandwich" />
               <div className="feature-card__overlay">
                 <div className="feature-card__tag">Build</div>
                 <div className="feature-card__title">In a <em>sandwich</em></div>
@@ -172,19 +181,10 @@ export default function HomePage() {
         </h2>
 
         <p className="order-cta__text">
-          Available for pickup in Downtown Toronto, Etobicoke, and North York. Order ahead and we'll have your Zaytün ready.
+          Available for pickup in Downtown Toronto, Etobicoke, and North York.
         </p>
 
-        <div className="order-cta__prices">
-          <div className="price-pill">
-            <div className="price-pill__weight">200g</div>
-            <div className="price-pill__price">$11</div>
-          </div>
-          <div className="price-pill">
-            <div className="price-pill__weight">800g</div>
-            <div className="price-pill__price">$40</div>
-          </div>
-        </div>
+        
 
         <NavLink to="/Order">
         <div className="btn-primary">
