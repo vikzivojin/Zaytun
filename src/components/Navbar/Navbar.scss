@@ -169,6 +169,8 @@ $transition-fast: 0.3s ease;
   opacity: 0;
   pointer-events: none;
   transition: opacity $transition-base;
+  align-items: center;
+  justify-content: center;
 
   &.open {
     opacity: 1;
@@ -205,6 +207,7 @@ $transition-fast: 0.3s ease;
   transition: color $transition-fast;
   outline: none;
   position: relative;
+  
 
   &::after {
     content: '';
