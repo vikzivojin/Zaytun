@@ -92,30 +92,32 @@ $transition:    0.25s ease;
 }
 
 // ── Section ────────────────────────────────────────────────
-.form-section {
-  margin-bottom: 40px;
+.order-page {
+  .form-section {
+    margin-bottom: 40px;
 
-  &:last-child {
-    margin-bottom: 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &__label {
+      display: block;
+      font-family: $font-body;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: $brown-mid;
+      margin-bottom: 16px;
+    }
   }
 
-  &__label {
-    display: block;
-    font-family: $font-body;
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: $brown-mid;
-    margin-bottom: 16px;
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: $border;
+    margin: 40px 0;
   }
-}
-
-.section-divider {
-  width: 100%;
-  height: 1px;
-  background: $border;
-  margin: 40px 0;
 }
 
 // ── Nut Warning ────────────────────────────────────────────
@@ -204,13 +206,6 @@ $transition:    0.25s ease;
 }
 
 .size-option {
-  position: relative;
-  cursor: pointer;
-
-  &__input {
-    display: none;
-  }
-
   &__card {
     display: flex;
     flex-direction: column;
@@ -221,7 +216,7 @@ $transition:    0.25s ease;
     background: white;
   }
 
-  &__input:checked + &__card {
+  &--active &__card {
     border-color: $accent;
     box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.15);
   }
@@ -266,7 +261,7 @@ $transition:    0.25s ease;
   }
 
   &__info {
-    padding: 14px 16px;
+    padding: 14px 16px 10px;
   }
 
   &__weight {
@@ -282,26 +277,99 @@ $transition:    0.25s ease;
     color: $gold;
   }
 
-  &__check {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 24px;
-    height: 24px;
-    background: $accent;
-    border-radius: 50%;
+  &__stepper {
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    transform: scale(0.6);
-    transition: all $transition;
-    z-index: 3;
+    gap: 0;
+    padding: 10px 16px 14px;
+    border-top: 1px solid $border;
+  }
+}
+
+// ── Stepper controls ───────────────────────────────────────
+.stepper-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $cream;
+  border: 1.5px solid $border;
+  border-radius: 8px;
+  cursor: pointer;
+  color: $brown-dark;
+  transition: all $transition;
+  flex-shrink: 0;
+
+  &:hover:not(:disabled) {
+    background: $accent;
+    border-color: $accent;
+    color: white;
   }
 
-  &__input:checked ~ &__check {
-    opacity: 1;
-    transform: scale(1);
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+.stepper-qty {
+  width: 40px;
+  text-align: center;
+  font-family: $font-display;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: $brown-dark;
+  user-select: none;
+}
+
+// ── Order Summary ──────────────────────────────────────────
+.order-summary {
+  margin-top: 20px;
+  padding: 20px 24px;
+  background: white;
+  border: 1.5px solid $border;
+  border-radius: $radius;
+
+  &__title {
+    font-family: $font-body;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: $brown-mid;
+    margin-bottom: 14px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.88rem;
+    color: $brown-mid;
+    padding: 5px 0;
+
+    &--total {
+      font-family: $font-display;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: $brown-dark;
+      padding-top: 6px;
+    }
+  }
+
+  &__divider {
+    height: 1px;
+    background: $border;
+    margin: 8px 0;
+  }
+
+  &__note {
+    margin-top: 12px;
+    font-size: 0.72rem;
+    color: rgba($brown-mid, 0.7);
+    text-align: right;
   }
 }
 
@@ -359,6 +427,7 @@ $transition:    0.25s ease;
     &[type="date"] {
       cursor: pointer;
     }
+
   }
 }
 
@@ -451,7 +520,7 @@ $transition:    0.25s ease;
   width: 100%;
   padding: 16px 32px;
   background: $brown-dark;
-  color: $accent-light;
+  color: $accent-light !important;
   font-family: $font-body;
   font-size: 0.75rem;
   font-weight: 500;
@@ -515,30 +584,53 @@ $transition:    0.25s ease;
 }
 
 // ── Success / Error ────────────────────────────────────────
-.form-feedback {
-  margin-top: 20px;
-  padding: 16px 20px;
-  border-radius: 10px;
-  font-size: 0.85rem;
-  text-align: center;
-  font-weight: 500;
+.order-page {
+  .form-feedback {
+    margin-top: 20px;
+    padding: 16px 20px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    text-align: center;
+    font-weight: 500;
 
-  &--success {
-    background: rgba(39, 174, 96, 0.1);
-    border: 1px solid rgba(39, 174, 96, 0.3);
-    color: darken($success, 10%);
-  }
+    &--success {
+      background: rgba(39, 174, 96, 0.1);
+      border: 1px solid rgba(39, 174, 96, 0.3);
+      color: $success;
+    }
 
-  &--error {
-    background: rgba(192, 57, 43, 0.08);
-    border: 1px solid rgba(192, 57, 43, 0.25);
-    color: $error;
+    &--error {
+      background: rgba(192, 57, 43, 0.08);
+      border: 1px solid rgba(192, 57, 43, 0.25);
+      color: $error;
+    }
   }
 }
 
 // ── Validation ─────────────────────────────────────────────
-.field-error {
+.order-page .field-error {
   font-size: 0.72rem;
   color: $error;
   margin-top: 2px;
+}
+
+// ── Delivery note ──────────────────────────────────────────
+.pickup-delivery-note {
+  margin-top: 12px;
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: $muted;
+  line-height: 1.6;
+
+  &__link {
+    color: $gold;
+    text-decoration: none;
+    border-bottom: 1px solid rgba($gold, 0.35);
+    transition: border-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      color: $gold-light;
+      border-bottom-color: $gold-light;
+    }
+  }
 }

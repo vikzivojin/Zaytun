@@ -33,19 +33,17 @@ const STORE_LOCATIONS = [
   {
     id: "tavazo-thornhill",
     name: "Tavazo",
-    area: "Thornhill / Richmond Hill",
-    address: "10309 Yonge St",
-    cityProvince: "Richmond Hill, Ontario  L4C 3B9",
+    area: "Thornhill",
+    address: "7345 Yonge St",
+    cityProvince: "Thornhill, Ontario  L3T 2B3",
     phone: "+1 877-781-0727",
     hours: [
-      { days: "Mon – Fri", time: "10:30 AM – 8:30 PM" },
-      { days: "Saturday",  time: "10:30 AM – 8:00 PM" },
-      { days: "Sunday",    time: "10:30 AM – 8:30 PM" },
+      { days: "Mon – Fri", time: "10:00 AM – 9:00 PM" },
+      { days: "Saturday",  time: "10:00 AM – 9:00 PM" },
+      { days: "Sunday",    time: "10:00 AM – 8:00 PM" },
     ],
-    mapEmbedUrl:
-      "https://www.google.com/maps/embed/v1/place?key=AIzaSyDCndO1y0-GIG0i5Bf2TZ9NNaEfzWyvJ1U&q=Tavazo+Dried+Nuts+%26+Fruits,+10309+Yonge+St,+Richmond+Hill,+ON",
-    mapsLink: "https://maps.google.com/?q=10309+Yonge+St+Richmond+Hill+Ontario",
-    note: "Look for Zaytün in the XXXX section near the front of the store.",
+    mapsLink: "https://www.google.ca/maps/place/Tavazo+Dried+Nuts+%26+Fruits/@43.7746414,-79.5802445,11z/data=!3m1!5s0x882b2cf71d6fb805:0x75684f82162624d1!4m10!1m2!2m1!1sTavazo+Dried+Nuts+%26+Fruits!3m6!1s0x882b2cf705f5c663:0x33ba4de1dcab1200!8m2!3d43.8065894!4d-79.4217291!15sChpUYXZhem8gRHJpZWQgTnV0cyAmIEZydWl0cyIDiAEBWhwiGnRhdmF6byBkcmllZCBudXRzICYgZnJ1aXRzkgEJbnV0X3N0b3JlmgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVU5rTVhOdFl6VjNSUkFC4AEA-gEECDAQSA!16s%2Fg%2F1tftlvfz?entry=ttu&g_ep=EgoyMDI2MDMxNy4wIKXMDSoASAFQAw%3D%3D",
+    note: "",
   },
 ];
 
@@ -122,16 +120,12 @@ function StoreCard({ location }) {
       </div>
 
       <div className="store-card__map">
-        <iframe
-          title={`Map for ${location.name}`}
-          src={location.mapEmbedUrl}
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
+        
+        <div class="embed-google-map">
+          <iframe width="100%" height="100" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" src="https://maps.google.com/maps?q=7345 Yonge St, Thornill, ON L3T 2B3, Canada&t=&zoom=4&maptype=roadmap&ie=UTF8&iwloc=&output=embed">
+          </iframe>
+          
+          </div>
       </div>
     </div>
   );

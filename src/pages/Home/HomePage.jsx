@@ -46,7 +46,7 @@ export default function HomePage() {
           </div>
 
           <h1 className="hero__title">
-            Olives <em>reimagined</em>
+            Olives <em>elevated</em>
           </h1>
 
           <p className="hero__desc">
@@ -176,8 +176,8 @@ export default function HomePage() {
         <div className="order-cta__label">Ready to Order</div>
 
         <h2 className="order-cta__title">
-          Pick up a jar.
-          <em>Change your table.</em>
+          Pick up a batch.
+          <em>Level up your table.</em>
         </h2>
 
         <p className="order-cta__text">
