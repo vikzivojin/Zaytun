@@ -17,7 +17,7 @@ import "./DatePicker.scss";
 //
 // PICKUP_WEEKS_AHEAD — how many weeks ahead customers can book.
 // ─────────────────────────────────────────────────────────────
-export const PICKUP_DAYS          = [3, 5];   // Wednesday, Friday
+export const PICKUP_DAYS          = [4];   // Thursdays
 export const PICKUP_EXTRA_DATES   = [];        // e.g. ["2025-12-24"]
 export const PICKUP_BLOCKED_DATES = [];        // e.g. ["2025-07-04"]
 export const PICKUP_WEEKS_AHEAD   = 5;
