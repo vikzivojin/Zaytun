@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import emailjs from '@emailjs/browser';
 import DatePicker from '../../components/DatePicker/DatePicker';
+import img200g from '../../assets/images/zaytun-200g.jpg';
+import img800g from '../../assets/images/zaytun-800g.jpg';
 import "./OrderPage.scss";
 
-// ─────────────────────────────────────────────────────────────
-// EmailJS config — https://www.emailjs.com
-// ─────────────────────────────────────────────────────────────
-const EMAILJS_SERVICE_ID  = "service_7lk0bfj";
-const EMAILJS_TEMPLATE_ID = "template_u589z4u";
-const EMAILJS_PUBLIC_KEY  = "nb0xJTyc1xYZiy3zI";
+const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const HST_RATE = 0.13;
 
 const SIZES = [
-  { id: "small", label: "200g", price: 11, emoji: "🫙" },
-  { id: "large", label: "800g", price: 40, emoji: "🏺" },
+  { id: "small", label: "200g", price: 11, img: img200g },
+  { id: "large", label: "800g", price: 40, img: img800g },
 ];
 
 const LOCATIONS = [
@@ -23,9 +22,8 @@ const LOCATIONS = [
   { id: "north-york", name: "North York (Bayview & Finch E)" },
 ];
 
-const RECIPIENT_EMAIL = "vikzivojin@gmail.com";
+const RECIPIENT_EMAIL = "adam@zaytun.ca";
 
-// ── Icons ─────────────────────────────────────────────────────
 function CheckIcon() {
   return (
     <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
@@ -50,9 +48,6 @@ function PlusIcon() {
   );
 }
 
-// ─────────────────────────────────────────────────────────────
-// OrderPage
-// ─────────────────────────────────────────────────────────────
 export default function OrderPage() {
   const [quantities, setQuantities] = useState(
     Object.fromEntries(SIZES.map(s => [s.id, 0]))
@@ -68,9 +63,8 @@ export default function OrderPage() {
   });
 
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState(null); // null | "loading" | "success" | "error"
+  const [status, setStatus] = useState(null);
 
-  // ── Quantity helpers ──────────────────────────────────────
   const changeQty = (id, delta) =>
     setQuantities(prev => ({ ...prev, [id]: Math.max(0, prev[id] + delta) }));
 
@@ -80,7 +74,6 @@ export default function OrderPage() {
   const total      = subtotal + tax;
   const fmt        = (n) => `$${n.toFixed(2)}`;
 
-  // ── Form helpers ──────────────────────────────────────────
   const set = (key, value) => setForm(f => ({ ...f, [key]: value }));
 
   const validate = () => {
@@ -95,7 +88,6 @@ export default function OrderPage() {
     return e;
   };
 
-  // ── Submit via EmailJS ────────────────────────────────────
   const handleSubmit = async () => {
     const errs = validate();
     setErrors(errs);
@@ -136,7 +128,6 @@ export default function OrderPage() {
   return (
     <div className="order-page">
 
-      {/* ── Header ── */}
       <header className="order-header">
         <span className="order-header__eyebrow">Place Your Order</span>
         <h1 className="order-header__title">
@@ -148,7 +139,6 @@ export default function OrderPage() {
         <div className="order-header__divider" />
       </header>
 
-      {/* ── Form ── */}
       <div className="order-form">
 
         {/* Step 1 — Allergen */}
@@ -187,7 +177,11 @@ export default function OrderPage() {
               >
                 <div className="size-option__card">
                   <div className="size-option__img-wrap">
-                    <span className="size-option__img-placeholder">{size.emoji}</span>
+                    <img
+                      src={size.img}
+                      alt={`Zaytün ${size.label} jar`}
+                      className="size-option__img"
+                    />
                     <span className="size-option__badge">{size.label}</span>
                   </div>
                   <div className="size-option__info">
@@ -221,36 +215,26 @@ export default function OrderPage() {
 
           {errors.quantities && <p className="field-error">{errors.quantities}</p>}
 
-          {/* Order Summary */}
           {totalItems > 0 && (
             <div className="order-summary">
               <div className="order-summary__title">Order Summary</div>
-
               {SIZES.filter(s => quantities[s.id] > 0).map(s => (
                 <div className="order-summary__row" key={s.id}>
                   <span>{s.label} × {quantities[s.id]}</span>
                   <span>{fmt(s.price * quantities[s.id])}</span>
                 </div>
               ))}
-
               <div className="order-summary__divider" />
-
               <div className="order-summary__row">
-                <span>Subtotal</span>
-                <span>{fmt(subtotal)}</span>
+                <span>Subtotal</span><span>{fmt(subtotal)}</span>
               </div>
               <div className="order-summary__row">
-                <span>HST (13%)</span>
-                <span>{fmt(tax)}</span>
+                <span>HST (13%)</span><span>{fmt(tax)}</span>
               </div>
-
               <div className="order-summary__divider" />
-
               <div className="order-summary__row order-summary__row--total">
-                <span>Total</span>
-                <span>{fmt(total)}</span>
+                <span>Total</span><span>{fmt(total)}</span>
               </div>
-
               <p className="order-summary__note">Prices in CAD. Payment collected at pickup.</p>
             </div>
           )}
@@ -350,7 +334,6 @@ export default function OrderPage() {
           {errors.location && <p className="field-error">{errors.location}</p>}
         </div>
 
-        {/* Submit */}
         <button
           className={`submit-btn ${status === "loading" ? "submit-btn--loading" : ""}`}
           onClick={handleSubmit}

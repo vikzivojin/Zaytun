@@ -1,4 +1,5 @@
 import { useState } from "react";
+import emailjs from '@emailjs/browser';
 import "./ContactPage.scss";
 
 function ArrowRight() {
@@ -9,10 +10,12 @@ function ArrowRight() {
   );
 }
 
-
+const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_CONTACT_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [form, setForm]     = useState({ name: "", email: "", subject: "", message: "" });
   const [status, setStatus] = useState("idle"); // idle | sending | success | error
 
   function handleChange(e) {
@@ -24,37 +27,30 @@ export default function ContactPage() {
     setStatus("sending");
 
     try {
-      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          service_id:  "YOUR_SERVICE_ID",
-          template_id: "YOUR_TEMPLATE_ID",
-          user_id:     "YOUR_PUBLIC_KEY",
-          template_params: {
-            from_name:    form.name,
-            from_email:   form.email,
-            subject:      form.subject,
-            message:      form.message,
-          },
-        }),
-      });
+      await emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name:  form.name,
+          from_email: form.email,
+          subject:    form.subject,
+          message:    form.message,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
 
-      if (res.ok) {
-        setStatus("success");
-        setForm({ name: "", email: "", subject: "", message: "" });
-      } else {
-        setStatus("error");
-      }
-    } catch {
+      setStatus("success");
+      setForm({ name: "", email: "", subject: "", message: "" });
+    } catch (err) {
+      console.log(err);
       setStatus("error");
     }
   }
 
-
   return (
     <div className="contact-page">
-      
+
       {/* ── Page Hero ── */}
       <section className="contact-hero">
         <div className="contact-hero__inner">
@@ -157,10 +153,8 @@ export default function ContactPage() {
           </form>
         </div>
 
-        
       </section>
 
-      
     </div>
   );
 }

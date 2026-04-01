@@ -4,8 +4,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap');
 
-
-
 // ── Footer ─────────────────────────────────────────────────
 .footer {
   background: $black;
@@ -41,17 +39,34 @@
 
 .footer__links {
   display: flex;
+  align-items: center;
   gap: 28px;
+}
 
-  a {
-    font-size: 0.65rem;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba($cream, 0.35);
-    text-decoration: none;
-    transition: color 0.25s ease;
+.footer__instagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: $black;
+  border: 1px solid rgba($cream, 0.15);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
 
-    &:hover { color: $gold; }
+  svg {
+    transition: opacity 0.25s ease;
+    opacity: 0.7;
+  }
+
+  &:hover {
+    background: #000;
+    border-color: rgba($cream, 0.4);
+    transform: translateY(-2px);
+
+    svg {
+      opacity: 1;
+    }
   }
 }
