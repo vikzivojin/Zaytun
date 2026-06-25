@@ -22,7 +22,7 @@ const LOCATIONS = [
   { id: "north-york", name: "North York (Bayview & Finch E)" },
 ];
 
-const RECIPIENT_EMAIL = "adam@zaytun.ca";
+const RECIPIENT_EMAIL = "order@zaytun.ca";
 
 function CheckIcon() {
   return (
