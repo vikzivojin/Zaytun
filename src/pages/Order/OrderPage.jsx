@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import emailjs from '@emailjs/browser';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../../firebase';
 import DatePicker from '../../components/DatePicker/DatePicker';
 import img200g from '../../assets/images/zaytun-200g.jpg';
 import img800g from '../../assets/images/zaytun-800g.jpg';
@@ -11,9 +13,9 @@ const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const HST_RATE = 0.13;
 
-const SIZES = [
-  { id: "small", label: "200g", price: 11, img: img200g },
-  { id: "large", label: "800g", price: 40, img: img800g },
+const BASE_SIZES = [
+  { id: "small", label: "200g", img: img200g },
+  { id: "large", label: "800g", img: img800g },
 ];
 
 const LOCATIONS = [
@@ -49,8 +51,29 @@ function PlusIcon() {
 }
 
 export default function OrderPage() {
+  // Live pricing from Firestore
+  const [prices, setPrices] = useState({ small: 11, large: 40 });
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "config", "availability"), (snap) => {
+      if (snap.exists()) {
+        const data = snap.data();
+        setPrices({
+          small: data.price_small ?? 11,
+          large: data.price_large ?? 40,
+        });
+      }
+    });
+    return unsub;
+  }, []);
+
+  const SIZES = BASE_SIZES.map(s => ({
+    ...s,
+    price: s.id === "small" ? prices.small : prices.large,
+  }));
+
   const [quantities, setQuantities] = useState(
-    Object.fromEntries(SIZES.map(s => [s.id, 0]))
+    Object.fromEntries(BASE_SIZES.map(s => [s.id, 0]))
   );
 
   const [form, setForm] = useState({

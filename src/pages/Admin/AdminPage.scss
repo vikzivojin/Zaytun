@@ -1,0 +1,586 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400;500&display=swap');
+
+// ── Variables ──────────────────────────────────────────────
+$black:      #0d0b09;
+$gold:       #c9a96e;
+$gold-light: #e8cfa0;
+$cream:      #f5efe6;
+$white:      #ffffff;
+$border:     #e2d5c3;
+$bg:         #f9f5f0;
+$text:       #2c1a0e;
+$muted:      #927054;
+$error:      #c0392b;
+$success:    #27ae60;
+
+$font-display: 'Cormorant Garamond', serif;
+$font-body:    'Jost', sans-serif;
+$radius:       10px;
+$transition:   0.2s ease;
+
+// ── Reset / base ───────────────────────────────────────────
+.admin-page,
+.admin-login {
+  font-family: $font-body;
+  font-size: 0.9rem;
+  color: $text;
+  min-height: 100vh;
+  background: $bg;
+}
+
+// ── Login ──────────────────────────────────────────────────
+.admin-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $black;
+
+  &__card {
+    background: $white;
+    border-radius: 16px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+    text-align: center;
+  }
+
+  &__logo {
+    font-size: 2rem;
+    color: $gold;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: 2rem;
+    font-weight: 300;
+    color: $text;
+    margin-bottom: 8px;
+  }
+
+  &__subtitle {
+    font-size: 0.8rem;
+    color: $muted;
+    margin-bottom: 32px;
+    letter-spacing: 0.05em;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+  }
+
+  &__error {
+    font-size: 0.78rem;
+    color: $error;
+    text-align: center;
+    background: rgba($error, 0.08);
+    border-radius: 6px;
+    padding: 10px;
+  }
+}
+
+// ── Top bar ────────────────────────────────────────────────
+.admin-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: $black;
+  color: $cream;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  &__brand {
+    font-family: $font-display;
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: $gold;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__email {
+    font-size: 0.75rem;
+    color: rgba($cream, 0.5);
+  }
+}
+
+// ── Body ───────────────────────────────────────────────────
+.admin-body {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.admin-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  color: $muted;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+
+// ── Section ────────────────────────────────────────────────
+.admin-section {
+  background: $white;
+  border-radius: $radius;
+  padding: 32px;
+  border: 1px solid $border;
+
+  &__title {
+    font-family: $font-display;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: $text;
+    margin-bottom: 8px;
+  }
+
+  &__desc {
+    font-size: 0.8rem;
+    color: $muted;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+}
+
+// ── Shared field ───────────────────────────────────────────
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &__label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $muted;
+  }
+
+  &__input {
+    padding: 11px 14px;
+    border: 1.5px solid $border;
+    border-radius: 8px;
+    font-family: $font-body;
+    font-size: 0.9rem;
+    color: $text;
+    background: $white;
+    outline: none;
+    transition: border-color $transition;
+
+    &:focus { border-color: $gold; }
+  }
+}
+
+.admin-label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $muted;
+  margin-bottom: 12px;
+}
+
+.admin-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+// ── Buttons ────────────────────────────────────────────────
+.admin-btn {
+  font-family: $font-body;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all $transition;
+
+  &--primary {
+    background: $gold;
+    color: $black;
+
+    &:hover:not(:disabled) {
+      background: $gold-light;
+      transform: translateY(-1px);
+    }
+
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: rgba($cream, 0.6);
+    border: 1px solid rgba($cream, 0.2);
+
+    &:hover {
+      color: $cream;
+      border-color: rgba($cream, 0.5);
+    }
+  }
+
+  &--large {
+    padding: 14px 40px;
+    font-size: 0.78rem;
+  }
+}
+
+// ── Weekday toggles ────────────────────────────────────────
+.admin-weekdays {
+  margin-bottom: 28px;
+}
+
+.admin-weekday-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.weekday-btn {
+  padding: 8px 14px;
+  border: 1.5px solid $border;
+  border-radius: 8px;
+  background: $white;
+  font-family: $font-body;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: $muted;
+  cursor: pointer;
+  transition: all $transition;
+
+  &:hover { border-color: $gold; color: $text; }
+
+  &--active {
+    background: $gold;
+    border-color: $gold;
+    color: $black;
+    font-weight: 500;
+  }
+}
+
+// ── Stepper ────────────────────────────────────────────────
+.admin-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1.5px solid $border;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.admin-step-btn {
+  width: 36px;
+  height: 36px;
+  background: $bg;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: $muted;
+  transition: background $transition;
+
+  &:hover { background: darken($bg, 4%); color: $text; }
+}
+
+.admin-step-val {
+  width: 40px;
+  text-align: center;
+  font-family: $font-display;
+  font-size: 1.1rem;
+  color: $text;
+  border-left: 1px solid $border;
+  border-right: 1px solid $border;
+  line-height: 36px;
+}
+
+// ── Admin Calendar ─────────────────────────────────────────
+.admin-calendar {
+  margin-top: 8px;
+}
+
+.admin-calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.admin-cal-month {
+  font-family: $font-display;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: $text;
+}
+
+.admin-cal-nav {
+  width: 32px;
+  height: 32px;
+  background: $bg;
+  border: 1.5px solid $border;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: $muted;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition;
+
+  &:hover { border-color: $gold; color: $text; }
+}
+
+.admin-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 4px;
+
+  &--labels { margin-bottom: 4px; }
+}
+
+.admin-cal-label {
+  text-align: center;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: $muted;
+  padding: 4px 0;
+}
+
+.admin-cal-day {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 6px;
+  font-family: $font-body;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all $transition;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &--recurring {
+    background: rgba($gold, 0.15);
+    color: darken($gold, 20%);
+    font-weight: 500;
+    border: 1px solid rgba($gold, 0.3);
+
+    &:hover { background: rgba($gold, 0.25); }
+  }
+
+  &--extra {
+    background: rgba($success, 0.12);
+    color: darken($success, 10%);
+    font-weight: 500;
+    border: 1px solid rgba($success, 0.3);
+
+    &:hover { background: rgba($success, 0.22); }
+  }
+
+  &--blocked {
+    background: rgba($error, 0.1);
+    color: $error;
+    font-weight: 500;
+    border: 1px solid rgba($error, 0.25);
+    text-decoration: line-through;
+
+    &:hover { background: rgba($error, 0.18); }
+  }
+
+  &--unavailable {
+    background: transparent;
+    color: rgba($text, 0.3);
+
+    &:hover {
+      background: rgba($success, 0.08);
+      color: $text;
+    }
+  }
+
+  &--past,
+  &--out-of-range {
+    background: transparent;
+    color: rgba($text, 0.15);
+    cursor: not-allowed;
+  }
+}
+
+// ── Legend ─────────────────────────────────────────────────
+.admin-cal-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid $border;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: $muted;
+
+  &::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  &--recurring::before { background: rgba($gold, 0.4); border: 1px solid rgba($gold, 0.5); }
+  &--extra::before     { background: rgba($success, 0.3); border: 1px solid rgba($success, 0.4); }
+  &--blocked::before   { background: rgba($error, 0.2); border: 1px solid rgba($error, 0.3); }
+  &--unavailable::before { background: rgba($text, 0.08); border: 1px solid rgba($text, 0.15); }
+}
+
+// ── Overrides ──────────────────────────────────────────────
+.admin-overrides {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid $border;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.override-group { display: flex; flex-direction: column; }
+
+.override-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  &--extra   { background: rgba($success, 0.12); color: darken($success, 10%); }
+  &--blocked { background: rgba($error, 0.1);    color: $error; }
+
+  &__remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    opacity: 0.6;
+    padding: 0;
+    line-height: 1;
+
+    &:hover { opacity: 1; }
+  }
+}
+
+// ── Pricing ────────────────────────────────────────────────
+.admin-price-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  @media (max-width: 480px) { grid-template-columns: 1fr; }
+}
+
+.admin-price-card {
+  border: 1.5px solid $border;
+  border-radius: $radius;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $muted;
+  }
+
+  &__input-wrap {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid $border;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color $transition;
+
+    &:focus-within { border-color: $gold; }
+  }
+
+  &__dollar {
+    padding: 0 12px;
+    font-family: $font-display;
+    font-size: 1.2rem;
+    color: $gold;
+    background: $bg;
+    border-right: 1.5px solid $border;
+    line-height: 44px;
+  }
+
+  &__input {
+    flex: 1;
+    border: none;
+    padding: 10px 14px;
+    font-family: $font-display;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: $text;
+    background: $white;
+    outline: none;
+    width: 100%;
+  }
+
+  &__hst {
+    font-size: 0.75rem;
+    color: $muted;
+  }
+}
+
+// ── Save bar ───────────────────────────────────────────────
+.admin-save-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  padding: 20px 32px;
+  background: $white;
+  border-radius: $radius;
+  border: 1px solid $border;
+  position: sticky;
+  bottom: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+
+.admin-save-msg {
+  font-size: 0.8rem;
+  color: $success;
+}

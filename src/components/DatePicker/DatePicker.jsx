@@ -1,26 +1,7 @@
 import { useState, useEffect, useRef } from "react";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase";
 import "./DatePicker.scss";
-
-// ─────────────────────────────────────────────────────────────
-// PICKUP AVAILABILITY CONFIG
-// Update this to control which dates customers can pick up.
-//
-// PICKUP_DAYS  — days of the week that are always available (0=Sun, 1=Mon,
-//                2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat). Leave empty [] to use
-//                only specific dates below.
-//
-// PICKUP_EXTRA_DATES — specific "YYYY-MM-DD" dates that are available
-//                      regardless of day.
-//
-// PICKUP_BLOCKED_DATES — specific "YYYY-MM-DD" dates that are NOT available
-//                        even if they fall on an allowed day (e.g. closures).
-//
-// PICKUP_WEEKS_AHEAD — how many weeks ahead customers can book.
-// ─────────────────────────────────────────────────────────────
-export const PICKUP_DAYS          = [4];   // Thursdays
-export const PICKUP_EXTRA_DATES   = [];        // e.g. ["2025-12-24"]
-export const PICKUP_BLOCKED_DATES = ["2026-07-02"];        // e.g. ["2025-07-04"]
-export const PICKUP_WEEKS_AHEAD   = 5;
 
 // ── Helpers ───────────────────────────────────────────────────
 const toYMD = (d) => {
@@ -30,22 +11,23 @@ const toYMD = (d) => {
   return `${y}-${m}-${day}`;
 };
 
-const buildAvailableSet = () => {
-  const available = new Set(PICKUP_EXTRA_DATES);
-  const blocked   = new Set(PICKUP_BLOCKED_DATES);
+const buildAvailableSet = (config) => {
+  const { recurring_days = [], extra_dates = [], blocked_dates = [], weeks_ahead = 5 } = config;
+  const available = new Set(extra_dates);
+  const blocked   = new Set(blocked_dates);
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
   const limit = new Date(today);
-  limit.setDate(limit.getDate() + PICKUP_WEEKS_AHEAD * 7);
+  limit.setDate(limit.getDate() + weeks_ahead * 7);
 
   const cursor = new Date(today);
-  cursor.setDate(cursor.getDate() + 1); // start from tomorrow
+  cursor.setDate(cursor.getDate() + 1);
 
   while (cursor <= limit) {
     const ymd = toYMD(cursor);
-    if (PICKUP_DAYS.includes(cursor.getDay()) && !blocked.has(ymd)) {
+    if (recurring_days.includes(cursor.getDay()) && !blocked.has(ymd)) {
       available.add(ymd);
     }
     cursor.setDate(cursor.getDate() + 1);
@@ -54,13 +36,19 @@ const buildAvailableSet = () => {
   return available;
 };
 
-const AVAILABLE = buildAvailableSet();
-
 const MONTH_NAMES = [
-  "January", "February", "March",     "April",   "May",      "June",
-  "July",    "August",   "September", "October", "November", "December",
+  "January","February","March","April","May","June",
+  "July","August","September","October","November","December",
 ];
-const DAY_NAMES = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+const DAY_NAMES = ["Su","Mo","Tu","We","Th","Fr","Sa"];
+
+// Fallback config in case Firestore is slow / unavailable
+const DEFAULT_CONFIG = {
+  recurring_days: [4],
+  extra_dates:    [],
+  blocked_dates:  [],
+  weeks_ahead:    5,
+};
 
 // ── Icons ─────────────────────────────────────────────────────
 function CalendarIcon() {
@@ -96,20 +84,34 @@ function ChevronRight() {
 //   error    — boolean, highlights trigger border red
 // ─────────────────────────────────────────────────────────────
 export default function DatePicker({ value, onChange, error }) {
+  const [config,    setConfig]    = useState(DEFAULT_CONFIG);
+  const [available, setAvailable] = useState(() => buildAvailableSet(DEFAULT_CONFIG));
+  const [open,      setOpen]      = useState(false);
+  const ref = useRef(null);
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const initialMonth = value
-    ? new Date(value + "T00:00:00")
-    : (() => {
-        const first = [...AVAILABLE].sort()[0];
-        return first ? new Date(first + "T00:00:00") : new Date();
-      })();
+  // Subscribe to Firestore config in real time
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "config", "availability"), (snap) => {
+      if (snap.exists()) {
+        const data = snap.data();
+        setConfig(data);
+        setAvailable(buildAvailableSet(data));
+      }
+    });
+    return unsub;
+  }, []);
 
-  const [open,      setOpen]      = useState(false);
+  const initialMonth = (() => {
+    if (value) return new Date(value + "T00:00:00");
+    const first = [...available].sort()[0];
+    return first ? new Date(first + "T00:00:00") : new Date();
+  })();
+
   const [viewYear,  setViewYear]  = useState(initialMonth.getFullYear());
   const [viewMonth, setViewMonth] = useState(initialMonth.getMonth());
-  const ref = useRef(null);
 
   // Close popover on outside click
   useEffect(() => {
@@ -130,7 +132,6 @@ export default function DatePicker({ value, onChange, error }) {
     else setViewMonth(m => m + 1);
   };
 
-  // Build grid: leading empty cells + day numbers
   const firstDay    = new Date(viewYear, viewMonth, 1).getDay();
   const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
   const cells = [
@@ -140,7 +141,7 @@ export default function DatePicker({ value, onChange, error }) {
 
   const selectDate = (d) => {
     const ymd = `${viewYear}-${String(viewMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
-    if (!AVAILABLE.has(ymd)) return;
+    if (!available.has(ymd)) return;
     onChange(ymd);
     setOpen(false);
   };
@@ -152,14 +153,13 @@ export default function DatePicker({ value, onChange, error }) {
     : "Select a pickup date";
 
   const limitDate = new Date(today);
-  limitDate.setDate(limitDate.getDate() + PICKUP_WEEKS_AHEAD * 7);
+  limitDate.setDate(limitDate.getDate() + (config.weeks_ahead || 5) * 7);
 
   const canGoPrev = !(viewYear === today.getFullYear()     && viewMonth === today.getMonth());
   const canGoNext = !(viewYear === limitDate.getFullYear() && viewMonth === limitDate.getMonth());
 
   return (
     <div className="date-picker" ref={ref}>
-      {/* Trigger button */}
       <button
         type="button"
         className={[
@@ -173,11 +173,8 @@ export default function DatePicker({ value, onChange, error }) {
         <CalendarIcon />
       </button>
 
-      {/* Popover calendar */}
       {open && (
         <div className="date-picker__popover">
-
-          {/* Month / year navigation */}
           <div className="dp-header">
             <button type="button" className="dp-nav" onClick={prevMonth} disabled={!canGoPrev} aria-label="Previous month">
               <ChevronLeft />
@@ -188,20 +185,17 @@ export default function DatePicker({ value, onChange, error }) {
             </button>
           </div>
 
-          {/* Day-of-week headers */}
           <div className="dp-grid dp-grid--header">
             {DAY_NAMES.map(n => (
               <span key={n} className="dp-cell dp-cell--label">{n}</span>
             ))}
           </div>
 
-          {/* Date cells */}
           <div className="dp-grid">
             {cells.map((d, i) => {
               if (!d) return <span key={`empty-${i}`} className="dp-cell" />;
-
               const ymd       = `${viewYear}-${String(viewMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
-              const available = AVAILABLE.has(ymd);
+              const isAvail   = available.has(ymd);
               const selected  = value === ymd;
               const isPast    = new Date(ymd + "T00:00:00") <= today;
 
@@ -211,11 +205,11 @@ export default function DatePicker({ value, onChange, error }) {
                   type="button"
                   className={[
                     "dp-cell dp-cell--day",
-                    available && !isPast ? "dp-cell--available" : "dp-cell--disabled",
-                    selected             ? "dp-cell--selected"  : "",
+                    isAvail && !isPast ? "dp-cell--available" : "dp-cell--disabled",
+                    selected           ? "dp-cell--selected"  : "",
                   ].join(" ")}
                   onClick={() => selectDate(d)}
-                  disabled={!available || isPast}
+                  disabled={!isAvail || isPast}
                   aria-label={ymd}
                   aria-pressed={selected}
                 >
@@ -224,7 +218,6 @@ export default function DatePicker({ value, onChange, error }) {
               );
             })}
           </div>
-
         </div>
       )}
     </div>
